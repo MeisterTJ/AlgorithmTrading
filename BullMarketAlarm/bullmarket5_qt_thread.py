@@ -1,3 +1,4 @@
+# 상승장 알리미 (쓰레드 버전)
 import sys
 from PyQt5.QtWidgets import *
 from PyQt5 import uic

@@ -1,3 +1,4 @@
+# 상승장 알리미 (2) - 타이머 만들기
 import sys
 from PyQt5.QtWidgets import *
 from PyQt5 import uic
@@ -47,4 +48,3 @@ app = QApplication(sys.argv)
 window = MyWindow()
 window.show()
 app.exec_()
-

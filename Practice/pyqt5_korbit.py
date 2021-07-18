@@ -22,6 +22,7 @@ class MyWindow(QMainWindow, form_class):
         price = pykorbit.get_current_price("BTC")
         self.lineEdit.setText(str(price))
 
+
 app = QApplication(sys.argv)
 window = MyWindow()
 window.show()

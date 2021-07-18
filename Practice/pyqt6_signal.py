@@ -8,7 +8,7 @@ class MySignal(QObject):
     signal2 = pyqtSignal(int, int)
 
     def run(self):
-        self.signal1.emit()     # emit을 호추랗면 connect에 연결된 함수를 실행한다.
+        self.signal1.emit()         # emit을 호출하면 connect에 연결된 함수를 실행한다.
         self.signal2.emit(1, 2)
 
 
