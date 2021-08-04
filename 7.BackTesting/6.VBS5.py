@@ -24,7 +24,7 @@ fee = 0.0032
 df['ror'] = np.where((df['high'] > df['target']) & df['bull'], df['close'] / df['target'] - fee, 1)
 
 # 기간 수익률
-df['hpr'] = df['ror'].cumprod()     #
+df['hpr'] = df['ror'].cumprod()     
 
 # dd = drawdown (낙폭)
 df['dd'] = (df['hpr'].cummax() - df['hpr']) / df['hpr'].cummax() * 100
