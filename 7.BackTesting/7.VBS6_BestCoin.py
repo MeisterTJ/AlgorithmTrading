@@ -38,6 +38,7 @@ for ticker in tickers:
     hpr = get_hpr(ticker)
     hprs.append((ticker, hpr))
 
+# 람다식 x:x[1] -> x의 1번째 인덱스의 값으로 역정렬한다. 
 sorted_hprs = sorted(hprs, key=lambda x:x[1], reverse=True)
 print(sorted_hprs[:5])
 
