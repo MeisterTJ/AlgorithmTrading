@@ -9,7 +9,7 @@
 # PyQt를 이용한 GUI 프로그램(프로세스)는 큐로부터 데이터를 가져오는 역할을 하는
 # Dummy-1 이라는 이름의 쓰레드와 가져온 데이터를 GUI 화면에 출력하는 역할을 담당하는 'Main Thread'로 구성된다.
 
-# 이 프로그램은 ProducerProcess와 GUI를 담당하는 MainProcess의 두 프로세스로 구성된다.
+# 이 프로그램은 Producer Process와 GUI를 담당하는 MainProcess의 두 프로세스로 구성된다.
 
 import multiprocessing as mp
 import websockets
@@ -36,6 +36,8 @@ async def bithumb_ws_client(q):
         while True:
             data = await websocket.recv()
             data = json.loads(data)
+
+            # 데이터를 받으면 이를 큐에 저장한다.
             q.put(data)
 
 
@@ -48,7 +50,7 @@ def producer(q):
 
 
 class Consumer(QThread):
-    poped = pyqtSignal(dict)
+    poped = pyqtSignal(dict)    # poped에 시그널 등록
 
     def __init__(self, q):
         super().__init__()
@@ -58,9 +60,9 @@ class Consumer(QThread):
         while True:
             if not self.q.empty():
                 data = q.get()
-                self.poped.emit(data)
+                self.poped.emit(data)   # pyqtSlot(dict) 함수 호출
 
-
+# GUI 클래스
 class MyWindow(QMainWindow):
     def __init__(self, q):
         super().__init__()
@@ -96,7 +98,8 @@ if __name__ == "__main__":
     # 프로세스간 통신을 위한 큐
     q = mp.Queue()
 
-
+    # producer 함수를 실행하는 프로세스를 만든다. 생성된 큐를 인자로 전달한다.
+    # 데몬 프로세스는 메인프로세스가 종료되면 같이 종료된다.
     p = mp.Process(name="Producer", target=producer, args=(q,), daemon=True)
     p.start()
 
