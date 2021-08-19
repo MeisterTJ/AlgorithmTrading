@@ -1,3 +1,4 @@
+# 실시간 호가창
 import sys
 import time
 import pybithumb
