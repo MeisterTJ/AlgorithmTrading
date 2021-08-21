@@ -28,7 +28,7 @@ def buy_crypto_currency(bithumb, ticker):
 
 
 # 매도 시도 함수
-def sell_crpyto_currency(bithumb, ticker):
+def sell_crypto_currency(bithumb, ticker):
     unit = bithumb.get_balance(ticker)[0]
     return bithumb.sell_market_order(ticker, unit)  # 인자로 들어온 ticker의 모든 unit을 시장가 매도한다.
 
